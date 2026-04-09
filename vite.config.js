@@ -4,7 +4,7 @@ import babel from '@rolldown/plugin-babel'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/phone-book",lll
+  base: "/phone-book",
   plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] })
