@@ -1,12 +1,16 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function PhoneBook() {
     const [data, setData] = useState({
-        contacts: [],
+        contacts: JSON.parse(localStorage.getItem("contacts")) ||[],
         name: "",
         number: "",
         filter: ""
     });
+
+    useEffect(() => {
+localStorage.setItem("contacts", JSON.stringify(data.contacts))
+    }, [data.contacts])
 
     const hanndleChange = (event) => {
         const { name, value } = event.target;
@@ -32,7 +36,6 @@ export default function PhoneBook() {
         }))
     }
 
-
     function deleteCont(i) {
         const updatedContacts = data.contacts.filter((_, index) => index !== i);
         setData((p) => ({
@@ -42,12 +45,9 @@ export default function PhoneBook() {
 
     }
 
-
     const filteredContacts = data.contacts.filter((contact) =>
         contact.name.toLowerCase().includes(data.filter.toLowerCase())
     )
-
-
 
     return (
         <>
